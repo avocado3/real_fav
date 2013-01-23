@@ -1,0 +1,60 @@
+real_fav.rb
+リアルふぁぼ（仮）
+
+あなたが誰かにふぁぼられたとき、LEDが光ってお知らせします。
+
+概要：
+ふぁぼを検出して、PCのシリアルポートに接続したXBeeと通信し、別のXBeeに接続されたLEDを無線制御で点滅させます。
+
+きっかけ：
+かずー氏(@kazoo04)のツイート(http://twitter.com/kazoo04/status/292682325639184386)
+
+必要なもの：
+
+ハードウェア
+- XBeeモジュール（2台）
+    予め、APIモードの設定が必要です
+- USBシリアル変換機器（ケーブル、変換基板etc）
+    PCにシリアルポートがない場合は必要になります
+- XBeeとシリアルポートを接続する回路
+
+ソフトウェア
+- X-CTU
+    XBeeの設定に使うソフトウェア。Digiの公式サイトで配布されている
+    Windows用、一応Wineでも動くらしい？（未検証）
+- ruby-serialport
+    Ubuntuだとapt-get install libserialport-rubyでインストールできた（ぉ
+
+超適当な説明：
+
+1. XBeeをPCに接続し、X-CTUを使って1台（以下親機）はCoordinator API、もう1台（以下子機）はEnd device APIに設定します。
+2. 子機の19番ピンに適当なLEDを接続します。
+3. ruby-serialportをインストールします。gemからインストールした場合は、real_fav.rbの2行目に"require 'rubygems'"って書かないとダメかも？
+4. real_fav.rbをmikutterのpluginディレクトリにコピーします。
+5. mikutterを起動すると、設定ダイアログに"リアルふぁぼ"の項目が増えているので、それを開きます。
+6. シリアルポートには、親機の接続されたポートの名前(dev/ttyUSB0とか)、XBeeエンドデバイスのアドレス(64bit)には、子機の本体に記載されている16桁の16進数を'01:23:45:67:89:0a:bc:de'のように入力してください。
+7. ふぁぼられを通知にチェックを入れます。
+8. だれかにふぁぼられるのを待ちます。
+9. ふぁぼられたときにLEDが光れば成功です。
+
+ライセンス：
+
+Copyright (C) 2013 Yasuhiro Kato
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+連絡先：
+@avocado3 http://twitter.com/avocado3
+<4vocadoorang3@gmail.com>
+
